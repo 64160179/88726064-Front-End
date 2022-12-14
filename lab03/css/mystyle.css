@@ -1,8 +1,107 @@
-body {
-    font-family: arial;
-    background-color: rgb(185, 179, 175);
+*{
+    margin: 0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    font-family: Arial;
+    background-color: rgb(213, 245, 224);
 }
 
 h1 {
     color: rgb(255, 255, 255);
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    margin-top: 450px;
+    
+
+}
+
+.card {
+    background: white;
+    width: 320px;
+    height: 400px;
+    margin: 50px;
+    border-radius: 15px;
+}
+
+.card-image {
+    height: 150px;
+    margin-bottom: 15px;
+    background-size: cover;
+    border-radius: 15px 15px 0 0;
+}
+
+.manu-1 {
+    background-image: url('https://img.wongnai.com/p/800x0/2017/06/22/c71d69ad5dbd48f49b5c82e2405d3b10.jpg');
+}
+
+.manu-2 {
+    background-image: url('https://img.wongnai.com/p/800x0/2017/10/03/41cca76dd9f94a1e92680a1a7af4cbd9.jpg');
+}
+
+.manu-3 {
+    background-image: url('https://img.wongnai.com/p/400x0/2018/12/04/621b5a73960d43d080b2bfabd8de9a23.jpg')
+}
+.manu-4 {
+    background-image: url('https://sites.google.com/site/xaharthaiphakhklang/_/rsrc/1453299390625/tmya-kung/3354.jpg?height=277&width=400%27');
+}
+
+nav a::after{
+    content: '';
+    position: absolute;
+    width: 10%;
+    opacity: 0;
+    height: 5px;
+    background-image: linear-gradient(to 
+    right,#f5450f,#006aff);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius:25px;
+    transition: .4s;
+}
+nav a:hover::after{
+    width: 50%;
+    opacity: 1;
+}
+
+nav{
+    background: #fff;
+    padding: 40px 60px;
+    border: solid 1 px #ccc;
+    border-radius:10px;
+}
+nav a{
+    text-decoration:none;
+    margin: 0 15px;
+    font-family:arial;
+    font-weight:bold;
+    letter-spacing:1px;
+    position:relative ;
+    color: #151515;
+}
+
+.button1{
+    margin: 0 5px;
+    margin-top: 20px;
+    padding: 12px 20px;
+    color: #555;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    outline: none;
 }
