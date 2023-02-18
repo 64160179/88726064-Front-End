@@ -1,0 +1,35 @@
+1.event (onLoad) เกิดขึ้นเมื่อไหร่ ? 
+    = เมื่อมีการ Click URL
+
+2.event (onSubmit) เกิดขึ้นเมื่อไหร่ ? 
+    = เมื่อมีการกดปุ่ม Submit
+
+3.attribute (name) ของแทก form, input มีไว้เพื่ออะไร ? 
+    = เพื่อให้ Javascript อ้างถึงค่าของข้อมูลที่ form / input เก็บไว้ได้ใน HTML
+
+4.ประโยคคำสั่ง var uid = document.registform.userid; คืออะไร ? 
+    = คือคำสั่งที่่ประกาศตัวแปร uid และให้ uid = ค่าของข้อมูลที่รับจากผู้ใช้ ซึ่งมีชื่อว่า userid
+
+5..focus() คืออะไร
+    = เป็นคำสั่งที่ให้ผู้ใช้งานโฟกัสกับสิ่งที่ทำต้องการนำเสนอ
+
+6.regular expression คืออะไร
+        = คัดกรองรูปแบบของข้อมูล
+    - var illegalChars = /\W/
+        = ยอมรับเฉพาะตัวอักษร, ตัวเลข และ ( _ ) เท่านั้น
+    - illegalChars.test(uid.value)
+        = ตรวจสอบว่าค่าของตัวแปร uid ตรงกับ illegalChars หรือไม่
+    - passid.value.search(/[a-zA-Z]+/) == -1
+        = ตรวจสอบว่าค่าของตัวแปร passid มีตัวอักษร a-z หรือ A-Z หรือไม่
+    - uname.value.match(letters)
+        = ตรวจสอบว่าค่าของตัวแปร uname เป็นตัวอักษรทั้งหมดเท่านั้น
+    
+
+7.ความเข้าใจต่อ code ต่อไปนี้
+    - var usex = document.registform.sex;
+        = คือคำสั่งที่่ประกาศตัวแปร usex และให้ usex = ค่าของข้อมูลที่รับจากผู้ใช้ ซึ่งมีชื่อว่า sex
+    - usex.length
+        = 
+    - usex[i].checked
+        = เพื่อตรวจสอบว่ามีการทำแล้วหรือไม่    ถ้าทำแล้วจะ return true; 
+                                        ถ้ายังไม่ทำจะ return false;   
