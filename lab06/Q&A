@@ -1,0 +1,25 @@
+a. เมื่อคลิกปุ่ม New Game
+    จะเรียกใช้ function  newGAME ให้ชนิดตัวแปร var ชื่อว่า randomIndex ที่มีค่าเท่ากับ
+    การสุ่มตัวเลขจากตัวแปร POSSIBLE_WORDS ที่เป็น length และแปลงชนิดข้อมูลให้เป็นจำนวนเต็มโดยใช้ parseInt
+    - ให้ตัวแปร word มีค่าเท่ากับ POSSIBLE_WORDS ที่มีค่าเป็น randomIndex
+    - ให้ตัวแปร guessCount มีค่าเท่ากับ MAX_GUESSES ที่มีค่าเป็น 6 
+    - ให้ตัวแปร guesses มีค่าเป็นค่าว่าง
+    เรียกใช้ function updatePage
+
+b. โปรแกรมรู้ได้อย่างไรว่า ตัวอักษรแต่ละตัวที่ทาย ถูก หรือ ไม่ถูก หลังจากคลิกปุ่ม Guess
+    เมื่อคลิกปุ่มจะ link ไปที่ function guessLetter
+    ตัว function guessLetter จะรับข่้อมูลผ่าน elementID #(guess/clue)
+    แล้วส่งข้อมูลเข้า Loop
+
+c. โปรแกรมรู้ได้อย่างไรว่า แพ้ หรือ ชนะ หลังจากคลิกปุ่ม Guess
+    รูั้ได้จาก function updatePage 
+    กำหนดให้ ตัวแปร clueString = "" เข้า loop ถ้าค่า guess>=0 จะบวกเพิ่มค่า clueString+= ด้วย letter + ""
+    else clueString+= "_"
+    ถ้าค่า guessCount == 0 guessArea โชว์ออกจอภาพ ว่า You lose.
+    ถ้าค่า clueString<0 guessArea โชว์ออกจอภาพ ว่า You win!!
+
+d. ทำไมถึงตั้งชื่อไฟล์รูปเป็นเลข 6 ของ hangman6.gif โดยแสดงเป็นรูปแรกเมื่อทายผิด แทนที่
+จะตั้งชื่อเป็น hangman0.gif
+    เพื่อให้ง่ายต่อการนนำมาใช้ เพราะว่า function guessLetter มีการใช้ Loop ที่กำหนดให้ค่า guessCount--
+    โดยที่ปกติแล้วค่า guessCount=6 จึงลดลงไปเรื่อย ๆ ซึ่ง array ของ js เริ่มด้วย 0 จากจำนวนรูปภาพทั้งหมด
+    6 รูปจึงตั้งชื่อเป็น 0-5 ตามหลัก array จึงให้รูปเริ่มต้น มีค่าเป็นบำดัยต่อมาคือลำดับที่ 6 
