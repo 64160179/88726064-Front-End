@@ -15,7 +15,7 @@
         <!-- @submit เป็นรูปย่อของ v-on:submit -->
         <form @submit.prevent="checkForm">
             <p v-if="errors.length">
-                <b>Please correct the following error(s):</b>
+                <b style="color: red"> Please correct the following error(s):</b>
             <ul>
                 <li v-for="error in errors">{{ error }}</li>
             </ul>
@@ -37,7 +37,7 @@
                 </select>
             </p>
             <p>
-                <!-- <button @click="checkForm">Submit</button> -->
+                 <!-- <button @click="checkForm">Submit</button> -->
                 <input type="submit" value="Submit">
             </p>
         </form>
@@ -59,6 +59,7 @@
                     this.errors = [];
                     if (!this.name) this.errors.push("Name required.");
                     if (!this.age) this.errors.push("Age required.");
+                    if (!this.movie) this.errors.push("Movie required.");
                     // prevent form submission
                     // e.preventDefault();
                 }
