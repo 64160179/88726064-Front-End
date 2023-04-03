@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo: Register</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- bootstrap 5 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitterbootstrap/5.0.2/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <!-- ก ำหนด id ให้กับ element div -->
+        <div id="app">
+            <!-- set page title -->
+            <h2>{{ title }}</h2>
+            <div>
+                <!-- use v-model to bind input -->
+                <label for="username">Username</label><br>
+                <input type="text" id="username" v-model="username"><br>
+                <label for="password">Password</label><br>
+                <input type="password" id="password" v-model="password"><br>
+                <label for="repassword">Re-type password</label><br>
+                <input type="password" id="repassword" v-model="confirmPassword"><br>
+                <div v-if="error" class="text-danger">{{ error }}</div>
+                <!-- use @click to bind button click event -->
+                <button @click="regist">Register</button>
+                <!-- show error -->
+            </div>
+            <br>
+            <div><a href="index.html">Login</a></div>
+        </div>
+    </div>
+    <script>
+        // สร้ำง Vue instance
+        const app = Vue.createApp({
+            // ก ำหนดข้อมูล (data) ที่ใช้งำน ใน app นี้ โดยจะมีข้อมูลเริ่มต้นดังนี้
+            // serviceUrl: ที่อยู่ของ service
+            // title: หัวข้อของหน้ำ
+            // username: ชื่อผู้ใช้งำน
+            // password: รหัสผ่ำน
+            // confirmPassword: ยืนยันรหัสผ่ำน
+            // error: ข้อควำม error
+            data() {
+                return {
+                    serviceUrl: "https://angsila.cs.buu.ac.th/~wittawas/652/88726064/services",
+                    title: 'Todo: Sign up',
+                    username: '',
+                    password: '',
+                    confirmPassword: '',
+                    error: ''
+                }
+            },
+            methods: {
+                // ฟังก์ชันส ำหรับกำรลงทะเบียน
+                regist() {
+                    // ตรวจสอบว่ำกรอกข้อมูลครบหรือไม่
+                    if (this.username == '' || this.password == '') {
+                        this.error = 'Please enter username and password'
+                        return
+                    }
+                    /// ก ำหนด endpoint ของ service ที่ใช้งำน
+                    endPoint = this.serviceUrl + '/api/auth/register'
+                    // ส่ง username และ password ไปยัง service ที่ใช้งำน ด้วย method post และรับ response กลับมำ
+                    // ถ้ำส ำเร็จให้ redirect ไปยังหน้ำ index.html
+                    // ถ้ำไม่ส ำเร็จให้แสดง error ที่ได้รับกลับมำ
+                    axios.post(endPoint, {
+                        username: this.username,
+                        password: this.password
+                    }).then(response => {
+                        // console.log(response.data)
+                        // ถ้ำ status ของ response มีค่ำเป็น success ให้ redirect ไปยังหน้ำ index.html
+                        if (response.data.status == 'success') {
+                            window.location.href = 'index.html'
+                        } else {
+                            this.error = response.data.status;
+                        }
+                    }).catch(error => {
+                        // show error
+                        this.error = error
+                    })
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

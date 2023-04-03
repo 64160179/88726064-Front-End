@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo app</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- bootstrap 5 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitterbootstrap/5.0.2/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <!-- ก ำหนด id ให้กับ element div -->
+        <div id="app">
+            <!-- set page title -->
+            <h2>{{ title }}</h2>
+            <div>
+                <!-- use v-model to bind input -->
+                <label for="username">Username</label><br>
+                <input type="text" v-model="username" name="username"><br>
+                <label for="password">Password</label><br>
+                <input type="password" v-model="password" name="password"><br>
+                <div v-if="error" class="text-danger">{{ error }}</div>
+                <!-- use @click to bind button click event -->
+                <button @click="login">Login</button>
+            </div>
+            <br>
+            <div><a href="register.html">Register</a></div>
+        </div>
+    </div>
+    <script>
+        // สร้ำง Vue instance
+        const app = Vue.createApp({
+            // ก ำหนดข้อมูล (data) ที่ใช้งำน ใน app นี้ โดยจะมีข้อมูลเริ่มต้นดังนี้
+            // serviceUrl คือ url ของ service ที่ใช้งำน
+            // title คือ หัวข้อของหน้ำเว็บ
+            // username คือ ชื่อผู้ใช้งำน
+            // password คือ รหัสผ่ำน
+            // error คือ ข้อควำมแสดง error
+            data() {
+                return {
+                    serviceUrl: "https://angsila.cs.buu.ac.th/~wittawas/652/88726064/services",
+                    title: 'Todo app',
+                    username: '',
+                    password: '',
+                    error: ''
+                }
+            },
+            methods: {
+                // login function
+                login() {
+                    // ตรวจสอบว่ำ username และ password ไม่ว่ำง
+                    if (this.username == '' || this.password == '') {
+                        // ก ำหนด error message ให้กับ error ซึ่งจะแสดงผลกลับไปที่หน้ำเว็บ
+                        this.error = 'Please enter username and password'
+                        return
+                    }
+                    // ก ำหนด endpoint ของ service ที่ใช้งำน
+                    endPoint = this.serviceUrl + '/api/auth/login';
+                    // ส่ง username และ password ไปยัง service ที่ใช้งำน ด้วย method post และรับ response กลับมำ
+                    axios.post(endPoint, {
+                        username: this.username,
+                        password: this.password
+                    }).then(response => { // รับ response จำก service ที่ใช้งำน
+                        // console.log(response.data)
+                        // ตรวจสอบว่ำ response มีข้อมูล 1 รำยกำร
+                        if (response.data.length == 1) {
+                            // บันทึก access token ลง localStorage โดยใช้ชื่อว่ำ access_token
+                            localStorage.setItem('access_token', response.data[0].access_token)
+                            // บันทึก username ลง localStorage โดยใช้ชื่อว่ำ username
+                            localStorage.setItem('username', response.data[0].username)
+                            // เปลี่ยนหน้ำเว็บไปยัง task.html
+                            window.location.href = 'task.html'
+                        } else {
+                            // ลบ access token ออกจำก localStorage 
+                            localStorage.removeItem('access_token');
+                            // ลบ username ออกจำก localStorage
+                            this.error = response.data.status;
+                        }
+                    }).catch(error => {
+                        // ก ำหนด error message ให้กับ error ซึ่งจะแสดงผลกลับไปที่หน้ำเว็บ
+                        this.error = error
+                    })
+                }
+            }
+        });
+        // เชื่อม app กับ element ที่มี id เป็น app
+        app.mount('#app')
+    </script>
+</body>
+
+</html>
